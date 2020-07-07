@@ -1,0 +1,40 @@
+body{
+	width: 100%;
+	margin:0;
+	text-align: center;
+}
+
+header{
+	background-color:#F3E9F1;
+	text-align: left;
+}
+
+.logo{
+	height:75px;
+	display: inline-block;
+	margin-left: 25px;
+}
+
+nav{
+	display: inline-block;
+	width:50%;
+	float:right;
+	text-align:right;
+}
+
+nav li{
+	display: inline-block;
+	padding: 10px 25px;
+	font-size: 20px;
+}
+
+#bloc-panier{
+	display: flex;
+
+}
+
+.panier-liste, .panier-form{
+	width:50%;
+	padding:20px;
+}
+
