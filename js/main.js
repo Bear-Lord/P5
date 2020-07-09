@@ -17,9 +17,15 @@ function getProduits(idProduit){
 	});
 }
 
+async function getProduits2(idProduit){
+	   let response = await fetch("http://localhost:3000/api/cameras/"+idProduit);
+	   let data = await response.json();
+	   return data ;
+}
+
 /* Affiche la liste et les informations de tous les produits pour la page index.html */
 async function showProduits(){
-	const produits = await getProduits("");
+	const produits = await getProduits2("");
 	var bloc_liste_produits = document.getElementById("liste_produits");
 	console.log(bloc_liste_produits);
 	console.log(produits);
