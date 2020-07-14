@@ -1,7 +1,9 @@
 /* Cherche les produits via l'API */
+
+/*
 function getProduits(idProduit){
 	return new Promise((resolve) => {
-		var request = new XMLHttpRequest();
+		let request = new XMLHttpRequest();
 		request.onreadystatechange = function() {
 		    if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
 		        resolve(JSON.parse(this.responseText));
@@ -16,64 +18,65 @@ function getProduits(idProduit){
 		request.send();
 	});
 }
+*/
 
-async function getProduits2(idProduit){
-	   let response = await fetch("http://localhost:3000/api/cameras/"+idProduit);
-	   let data = await response.json();
-	   return data ;
+async function getProduits(idProduit){
+   let response = await fetch("http://localhost:3000/api/cameras/"+idProduit);
+   let data = await response.json();
+   return data ;
 }
 
 /* Affiche la liste et les informations de tous les produits pour la page index.html */
 async function showProduits(){
-	const produits = await getProduits2("");
-	var bloc_liste_produits = document.getElementById("liste_produits");
+	const produits = await getProduits("");
+	let bloc_liste_produits = document.getElementById("liste_produits");
 	console.log(bloc_liste_produits);
 	console.log(produits);
 
 	produits.forEach((produit) => {
 		
 
-		var div_produit = document.createElement("div");
+		let div_produit = document.createElement("div");
 		div_produit.setAttribute("class", "produit");
 
 
-		var div_produit_img = document.createElement("div");
+		let div_produit_img = document.createElement("div");
 		div_produit_img.setAttribute("class", "produit-left-part");
 		div_produit.appendChild(div_produit_img);
 
-		var a_img_produit = document.createElement("a");
+		let a_img_produit = document.createElement("a");
 		a_img_produit.setAttribute("href", "produit.html?id="+produit._id);
 
-		var img_produit = document.createElement("img");
+		let img_produit = document.createElement("img");
 		img_produit.setAttribute("class", "produit-image");
 		img_produit.setAttribute("src", produit.imageUrl);
 		a_img_produit.appendChild(img_produit);
 
 		div_produit_img.appendChild(a_img_produit);
 
-		var div_produit_text = document.createElement("div");
+		let div_produit_text = document.createElement("div");
 		div_produit_text.setAttribute("class", "produit-right-part");
 		div_produit.appendChild(div_produit_text);
 
 
 
-		var a_p_produit_nom = document.createElement("a");
+		let a_p_produit_nom = document.createElement("a");
 		a_p_produit_nom.setAttribute("href", "produit.html?id="+produit._id);
 		a_p_produit_nom.textContent = produit.name;
 
-		var p_produit_nom = document.createElement("p");
+		let p_produit_nom = document.createElement("p");
 		p_produit_nom.setAttribute("class", "produit-nom");
 		
 		p_produit_nom.appendChild(a_p_produit_nom);
 
 		div_produit_text.appendChild(p_produit_nom);
 
-		var p_produit_prix = document.createElement("p");
+		let p_produit_prix = document.createElement("p");
 		p_produit_prix.setAttribute("class", "produit-prix");
-		p_produit_prix.textContent = "Prix : "+produit.price+" €";
+		p_produit_prix.textContent = "Prix : "+(produit.price/100)+" €";
 		div_produit_text.appendChild(p_produit_prix);
 
-		var p_produit_description = document.createElement("p");
+		let p_produit_description = document.createElement("p");
 		p_produit_description.setAttribute("class", "produit-description");
 		p_produit_description.textContent = produit.description;
 		div_produit_text.appendChild(p_produit_description);
@@ -95,48 +98,48 @@ async function showProduit(){
 	const produit = await getProduits(idProduit);
 	console.log(produit)
 
-	var bloc_main_produit = document.getElementById("main_produit");
+	let bloc_main_produit = document.getElementById("main_produit");
 
-	var h1_produit = document.createElement("h1");
+	let h1_produit = document.createElement("h1");
 	h1_produit.textContent = produit.name;
 	bloc_main_produit.appendChild(h1_produit);
 
-	var div_produit_image = document.createElement("div");
+	let div_produit_image = document.createElement("div");
 	
 
-	var img_produit = document.createElement("img");
+	let img_produit = document.createElement("img");
 	img_produit.setAttribute("src", produit.imageUrl);
 	img_produit.setAttribute("class", "produit-image");
 	div_produit_image.appendChild(img_produit);
 
 	bloc_main_produit.appendChild(div_produit_image);
 
-	var div_produit_description = document.createElement("div");
+	let div_produit_description = document.createElement("div");
 	div_produit_description.setAttribute("class", "produit-description");
 
-	var p_description = document.createElement("p");
+	let p_description = document.createElement("p");
 	p_description.textContent = produit.description;
 	div_produit_description.appendChild(p_description);
 
-	var p_prix = document.createElement("p");
-	p_prix.textContent = "Prix : " + produit.price + "€";
+	let p_prix = document.createElement("p");
+	p_prix.textContent = "Prix : " + (produit.price/100) + "€";
 	div_produit_description.appendChild(p_prix);
 
-	var p_choix_lentille = document.createElement("p");
+	let p_choix_lentille = document.createElement("p");
 	p_choix_lentille.textContent = "Choisissez votre lentille : ";
 	div_produit_description.appendChild(p_choix_lentille);
 
 
-	var select_lentille = document.createElement("select");
+	let select_lentille = document.createElement("select");
 	console.log(produit);
 	produit.lenses.forEach((option) => {
-		var option_lentille = document.createElement("option");
+		let option_lentille = document.createElement("option");
 		option_lentille.textContent = option;
 		select_lentille.appendChild(option_lentille);
 	});
 	div_produit_description.appendChild(select_lentille);
 
-	var button_panier = document.createElement("button");
+	let button_panier = document.createElement("button");
 	button_panier.setAttribute("id", "button-achat");
 	button_panier.textContent = "Ajouter au panier";
 	button_panier.addEventListener("click", ajouterPanier);
@@ -151,37 +154,124 @@ if(localStorage.getItem("panier")){
 	console.log("Le panier existe");
 } else {
 	console.log("Le panier n'existe pas");
-	var panierVide = [];
+	let panierVide = [];
 	localStorage.setItem("panier", JSON.stringify(panierVide))
 }
 
 async function ajouterPanier(){
 	console.log("ajout panier");
-	var panierUtilisateur = JSON.parse(localStorage.getItem("panier"));
+	let panierUtilisateur = JSON.parse(localStorage.getItem("panier"));
 	const produit = await getProduits(getIdProduit());
 	panierUtilisateur.push(produit);
 	localStorage.setItem("panier", JSON.stringify(panierUtilisateur));
 	console.log(panierUtilisateur);
 }
 function showPanier(){
-	var panierUtilisateur = JSON.parse(localStorage.getItem("panier"));
+	let panierUtilisateur = JSON.parse(localStorage.getItem("panier"));
 
-	var div_panier_liste = document.getElementById("panier_liste");
+	let div_panier_liste = document.getElementById("panier_liste");
+	div_panier_liste.innerHTML = "";
+	let h2_panier = document.createElement("h2");
+	h2_panier.textContent = "Vos articles";
+	div_panier_liste.appendChild(h2_panier);
 
 	if(panierUtilisateur.length == 0){
-		var p_panier_vide = document.createElement("p");
-		button_panier.textContent = "Le panier est vide.";
-		div_panier_liste.appendChild(button_panier);
+		let p_panier_vide = document.createElement("p");
+		p_panier_vide.textContent = "Le panier est vide.";
+		div_panier_liste.appendChild(p_panier_vide);
 	} else {
-		var total = 0;
+		let total = 0;
+
+		let fond_beige = true;
+
+		let num_produit = 1;
 		panierUtilisateur.forEach((produit) => {
-			var div_produit = document.createElement("div");
-			div_produit.textContent = produit.name + " - " + produit.price;
+			let div_produit = document.createElement("div");
+			if(fond_beige){
+				div_produit.setAttribute("class", "panier-element fond-beige");
+			} else {
+				div_produit.setAttribute("class", "panier-element");
+			}
+
+			div_produit.setAttribute("id", "produit_panier_"+num_produit);
+
+			let div_produit_left_part = document.createElement("div");
+			div_produit_left_part.setAttribute("class", "panier-element-left-part");
+			div_produit_left_part.textContent = produit.name + " - Prix : " + (produit.price/100) + "€";
+			div_produit.appendChild(div_produit_left_part);
+
+			let div_produit_right_part = document.createElement("div");
+			div_produit_right_part.setAttribute("class", "panier-element-right-part");
+			div_produit_right_part.textContent = "X";
+			div_produit_right_part.addEventListener("click", supprimerProduitPanier.bind(num_produit));
+			console.log("num_produit " + num_produit)
+			div_produit.appendChild(div_produit_right_part);
+
 			div_panier_liste.appendChild(div_produit);
-			total = total + produit.price;
+
+			total = total + (produit.price/100);
+			fond_beige = !fond_beige;
+			num_produit = num_produit+1;
 		});
-		var div_produit = document.createElement("div");
+		let div_produit = document.createElement("div");
+		div_produit.setAttribute("class", "panier-element bold");
 		div_produit.textContent = "Total : "+total+" €";
 		div_panier_liste.appendChild(div_produit);
 	}
+}
+
+function supprimerProduitPanier(num_produit){
+	let panierUtilisateur = JSON.parse(localStorage.getItem("panier"));
+	panierUtilisateur.splice(num_produit, 1);
+	localStorage.setItem("panier", JSON.stringify(panierUtilisateur));
+	console.log("produit supprimé du panier");
+
+	showPanier();
+}
+
+function checkFormulaire(){
+	let checkString = /^[a-zA-Z ,.'-]/;
+    let checkMail = /.+@.+\..+/;
+    let checkAdresse = /^[^@&"()!_$*€£`%+=\/;?#]+$/;
+
+    let nom = document.getElementById("nom").value;
+    let prenom = document.getElementById("prenom").value;
+    let adresse = document.getElementById("adresse").value;
+    let ville = document.getElementById("ville").value;
+    let email = document.getElementById("email").value;
+
+    let message_erreur = ""
+    if(checkString.test(nom) == false){
+		message_erreur += "Nom incorrect. ";
+    } else {
+    	console.log("nom ok");
+    }
+
+    if(checkString.test(prenom) == false){
+		message_erreur += "Prénom incorrect. ";
+    } else {
+    	console.log("prénom ok");
+    }
+
+    if(checkAdresse.test(adresse) == false){
+		message_erreur += "Adresse incorrect. ";
+    } else {
+    	console.log("adresse ok");
+    }
+
+    if(checkString.test(ville) == false){
+		message_erreur += "Ville incorrect. ";
+    } else {
+    	console.log("ville ok");
+    }
+
+    if(checkMail.test(email) == false){
+		message_erreur += "Email incorrect. ";
+    } else {
+    	console.log("email ok");
+    }
+
+    if(message_erreur != ""){
+    	alert(message_erreur);
+    }
 }
