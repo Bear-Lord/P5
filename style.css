@@ -155,3 +155,41 @@ h1{
 	width: 75%;
 }
 
+.wiggle{
+	animation: none;
+	display: inline-block;
+}
+.wiggle:hover {
+	animation: wiggle 1500ms ease-in-out infinite;
+  
+}
+
+@keyframes wiggle {
+  	0% {
+    	transform: rotate(7deg);
+    }
+  	10% {
+   		transform: rotate(-2.5deg);
+   	}
+ 	20% {
+    	transform: rotate(2deg);
+    }
+  	30% {
+   	 	transform: rotate(-2.5deg);
+   	}
+ 	40% {
+   	 	transform: rotate(1deg);
+   	}
+  	50% {
+   	 	transform: rotate(-1.5deg);
+   	}
+   	60% {
+    	transform: rotate(0deg);
+	}
+	90% {
+		transform: rotate(0deg);
+	}
+	100%{
+		transform: rotate(7deg);
+	}
+}
