@@ -165,6 +165,7 @@ async function ajouterPanier(){
 	panierUtilisateur.push(produit);
 	localStorage.setItem("panier", JSON.stringify(panierUtilisateur));
 	console.log(panierUtilisateur);
+	document.location.href = "index.html";
 }
 function showPanier(){
 	let panierUtilisateur = JSON.parse(localStorage.getItem("panier"));
@@ -242,36 +243,69 @@ function checkFormulaire(){
 
     let message_erreur = ""
     if(checkString.test(nom) == false){
-		message_erreur += "Nom incorrect. ";
+		message_erreur += "Nom incorrect.\n";
     } else {
     	console.log("nom ok");
     }
 
     if(checkString.test(prenom) == false){
-		message_erreur += "Prénom incorrect. ";
+		message_erreur += "Prénom incorrect.\n";
     } else {
     	console.log("prénom ok");
     }
 
     if(checkAdresse.test(adresse) == false){
-		message_erreur += "Adresse incorrect. ";
+		message_erreur += "Adresse incorrect.\n";
     } else {
     	console.log("adresse ok");
     }
 
     if(checkString.test(ville) == false){
-		message_erreur += "Ville incorrect. ";
+		message_erreur += "Ville incorrect.\n";
     } else {
     	console.log("ville ok");
     }
 
     if(checkMail.test(email) == false){
-		message_erreur += "Email incorrect. ";
+		message_erreur += "Email incorrect.\n";
     } else {
     	console.log("email ok");
     }
 
     if(message_erreur != ""){
     	alert(message_erreur);
+    	return false;
+    } else {
+    	let panierUtilisateur = JSON.parse(localStorage.getItem("panier"));
+		if (panierUtilisateur.length == 0){
+			alert("Le panier est vide.");
+			return false;
+		}
+    	return true;
     }
+}
+
+function confirmation(){
+	let panierUtilisateur = JSON.parse(localStorage.getItem("panier"));
+	if (panierUtilisateur.length == 0){
+		let p_message_erreur = document.createElement("p");
+		p_message_erreur.textContent = "Il n'y a eu aucune commande de passée.";
+		let p_confirmation_message = document.getElementById("confirmation_message");
+		p_confirmation_message.innerHTML = "";
+		p_confirmation_message.appendChild(p_message_erreur);
+	} else {
+		let total = calculeTotal(panierUtilisateur);
+		let p_confirmation_total = document.getElementById("confirmation_total");
+		p_confirmation_total.textContent = "Total : " + total + " €";
+		let panierVide = [];
+		localStorage.setItem("panier", JSON.stringify(panierVide));
+	}	
+}
+
+function calculeTotal(panierUtilisateur){
+	let total = 0;
+	panierUtilisateur.forEach((produit) => {
+		total = total + (produit.price/100);
+	});
+	return total;
 }

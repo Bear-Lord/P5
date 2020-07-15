@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="Default">
+<html lang="fr">
 <head>
     <meta charset="utf-8">
     <meta name="description" content="Site de vente de caméras">
@@ -19,24 +19,24 @@
 
 <body>
 	<header>
-		<a class="wiggle" href="index.html"><img src="images/logo-orinoco.png" class="logo"></a>
+		<a href="index.html"><img src="images/logo-orinoco.png" class="logo" alt="logo orinoco"></a>
 		<nav>
 			<ul>
 				<li><a class="wiggle" href="index.html">Accueil</a></li>
-				<li><a class="wiggle" href="panier.html">panier</a></li>
+				<li><a class="wiggle" href="panier.html">Panier</a></li>
 			</ul>
 		</nav>
 	</header>
 
 <h1>Panier</h1>
 
-	<main id="bloc-panier">		
+	<main id="bloc_panier">		
 		<div id="panier_liste" class="panier-liste">
 			
 		</div>
 		<div class="panier-form">
 			<h2>Formulaire de commande</h2>
-			<form>
+			<form method="get" action="confirmation.html" onsubmit="return checkFormulaire()">
 				<div class="panier-form-part">
 					<div class="panier-form-left-part">
 						<label for="nom">Nom</label>
@@ -83,7 +83,7 @@
 				</div>
 
 				<div class="panier-form-part-submit">
-					<input class="margin-auto button" type="submit" onclick="checkFormulaire()" value="Valider la commande">
+					<input class="margin-auto button" type="submit" value="Valider la commande">
 				</div>
 			</form>
 		</div>
