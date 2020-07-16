@@ -242,19 +242,19 @@ function checkFormulaire(){
     let email = document.getElementById("email").value;
 
     let message_erreur = ""
-    if(checkString.test(nom) == false){
+    if(!checkString.test(nom) ){
 		message_erreur += "Nom incorrect.\n";
     } else {
     	console.log("nom ok");
     }
 
-    if(checkString.test(prenom) == false){
+    if(!checkString.test(prenom) ){
 		message_erreur += "Prénom incorrect.\n";
     } else {
     	console.log("prénom ok");
     }
 
-    if(checkAdresse.test(adresse) == false){
+    if(!checkAdresse.test(adresse) ){
 		message_erreur += "Adresse incorrect.\n";
     } else {
     	console.log("adresse ok");
