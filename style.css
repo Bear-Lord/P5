@@ -97,6 +97,9 @@ h1{
 	width: 10%;
 	font-weight: bold;
 	font-size: 14px;
+}
+
+.cursor{
 	cursor: pointer;
 }
 

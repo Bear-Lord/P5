@@ -7,8 +7,8 @@ async function showProduits(){
 	console.log(bloc_liste_produits);
 	console.log(produits);
 
-	produits.forEach((produit) => {
-		
+	/* pour chaque produit, affiche les blocs contenant ses informations en HTML */
+	produits.forEach((produit) => {		
 
 		let div_produit = document.createElement("div");
 		div_produit.setAttribute("class", "produit");
