@@ -113,7 +113,8 @@ function diminuerProduitPanier(num_produit){
 
 /* vérifie que les données du formulaire sont correctement formatées.
 Le formulaire n'est validé que si checkFormulaire renvoit true */
-function checkFormulaire(){
+function checkFormulaire(e){
+	e.preventDefault();
 	let checkString = /^[a-zA-Zàáâãäåçèéêëìíîïðòóôõöùúûüýÿ ,.'-]/;
     let checkMail = /.+@.+\..+/;
     let checkAdresse = /^[^@&"()!_$*€£`%+=\/;?#]+$/;
@@ -179,7 +180,7 @@ function checkFormulaire(){
 		}
 		let objet = {
 			contact,
-			panierUtilisateur
+			products:panierUtilisateur
 		}
 
 		let objetRequest = JSON.stringify(objet);
@@ -187,9 +188,10 @@ function checkFormulaire(){
      	request.open("POST", "http://localhost:3000/api/cameras/order");
       	request.setRequestHeader("Content-Type", "application/json");
 	    request.onreadystatechange = function() {
-	        if (this.readyState == XMLHttpRequest.DONE){
+	    	    if (this.readyState == XMLHttpRequest.DONE){
 		        console.log(this.responseText);
 		        localStorage.setItem('order', this.responseText);
+		        document.location.assign("./confirmation.html")
 
 		    }
       	}
@@ -197,3 +199,7 @@ function checkFormulaire(){
     	return true;
     }
 }
+        document.querySelector("form").addEventListener("submit",checkFormulaire);
+
+
+
