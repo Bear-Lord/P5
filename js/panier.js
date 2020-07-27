@@ -172,14 +172,14 @@ function checkFormulaire(e){
 		error_message.classList.add("hidden");
 
 		let contact = {
-			lastName : nom,
-			firstName : prenom,
-			email : email,
-			address : adresse,
-			city : ville
+			lastName : nom.value,
+			firstName : prenom.value,
+			email : email.value,
+			address : adresse.value,
+			city : ville.value
 		}
 		let objet = {
-			contact,
+			contact: contact,
 			products:panierUtilisateur
 		}
 
@@ -188,18 +188,18 @@ function checkFormulaire(e){
      	request.open("POST", "http://localhost:3000/api/cameras/order");
       	request.setRequestHeader("Content-Type", "application/json");
 	    request.onreadystatechange = function() {
-	    	    if (this.readyState == XMLHttpRequest.DONE){
-		        console.log(this.responseText);
+	    	if (this.readyState == XMLHttpRequest.DONE){
 		        localStorage.setItem('order', this.responseText);
+		        console.log(this.responseText);
 		        document.location.assign("./confirmation.html")
-
 		    }
       	}
       	request.send(objetRequest);
     	return true;
     }
 }
-        document.querySelector("form").addEventListener("submit",checkFormulaire);
+
+document.querySelector("form").addEventListener("submit",checkFormulaire);
 
 
 
